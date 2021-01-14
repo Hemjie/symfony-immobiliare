@@ -18,6 +18,13 @@ class WelcomeController extends AbstractController //permet d'utiliser le render
     public function hello() { //bien mettre le code pour une route juste en-dessous
         // on renvoie tjs un objet Response
         // return new Response('<html><body>Hello Symfony</body></html>'); //balise body pour que la toolbar fonctionne tjs
-        return $this->render('Welcome/hello.html.twig'); //le chemin templates est déjà dans le render
+
+        $name = "Symfony";
+        //le chemin templates est déjà dans le render, retourne tjs une réponse
+        //le second paramètre de render est un tableau avec clé => valeur
+        //où clé est le nom de la variable Twig et valeur, celle de la variable
+        return $this->render('welcome/hello.html.twig',
+            ['name' => $name
+            ]);
     }
 }
