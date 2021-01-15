@@ -56,9 +56,12 @@ class PropertyController extends AbstractController
 
     /**
      * @Route("/property.json", name="property_api")
+     * /property.{_format)
      */
     public function api(): Response
     {
         return $this->json($this->properties);
+        //permet de récupérer des données dans le format qu'on veut (json, xml...)
+        // return new Response (json_encode($this->properties);
     }
 }
