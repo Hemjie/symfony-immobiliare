@@ -7,6 +7,8 @@
     {{ form_start(realEstateForm) }} <!-- <form> -->
         {{ form_widget(realEstateForm) }} <!-- <input> -->
 
-        <button class="btn btn-primary">Ajouter</button>
+        <!-- formnovalidate désactive la validation HTML5 -->
+        <button class="btn btn-primary" formnovalidate>Ajouter</button>
     {{ form_end(realEstateForm) }}
+    <!-- Les formulaires de Symfony sont protégés des failles CSRF -->
 {% endblock %}

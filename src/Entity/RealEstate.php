@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\RealEstateRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=RealEstateRepository::class)
@@ -20,32 +21,52 @@ class RealEstate
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255)     *
+     *
+     * @Assert\NotBlank
+     * NotBlank =  non nul
      */
     private $title;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     *
+     * @Assert\Length(min=15)
+     * @Assert\Regex(
+     *     pattern="/(merde|putain)/",
+     *     match=false,
+     *     message="Tu ne peux pas dire le mot m**** ou p*****"
+     * )
      */
     private $description;
 
     /**
      * @ORM\Column(type="integer")
+     *
+     * @Assert\NotBlank
+     * @Assert\Range(min=10, max=400)
      */
     private $surface;
 
     /**
      * @ORM\Column(type="integer")
+     *
+     * @Assert\NotBlank
+     * @Assert\Positive
      */
     private $price;
 
     /**
      * @ORM\Column(type="integer")
+     *
+     * @Assert\NotBlank
      */
     private $rooms;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\NotBlank
      */
     private $type;
 
