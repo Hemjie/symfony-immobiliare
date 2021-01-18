@@ -1,0 +1,12 @@
+{% extends 'base.html.twig'%}
+
+{%  block body %}
+    <h1>Ajouter une annonce</h1>
+
+    {# J'affiche mon formulaire #}
+    {{ form_start(realEstateForm) }} <!-- <form> -->
+        {{ form_widget(realEstateForm) }} <!-- <input> -->
+
+        <button class="btn btn-primary">Ajouter</button>
+    {{ form_end(realEstateForm) }}
+{% endblock %}
