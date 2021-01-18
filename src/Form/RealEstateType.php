@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\RealEstate;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\RangeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,7 +16,13 @@ class RealEstateType extends AbstractType
         $builder
             ->add('title')
             ->add('description')
-            ->add('surface')
+            ->add('surface', RangeType::class, [  //on configure un input de type range
+                'attr' => [
+                    'min' => 10,
+                    'max' => 400,
+                    'class' => 'p-0',
+                ],
+            ])
             ->add('price')
             ->add('rooms', ChoiceType::class, [
                 'choices' => [
