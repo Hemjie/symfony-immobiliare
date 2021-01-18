@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\RealEstate;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,8 +17,24 @@ class RealEstateType extends AbstractType
             ->add('description')
             ->add('surface')
             ->add('price')
-            ->add('rooms')
-            ->add('type')
+            ->add('rooms', ChoiceType::class, [
+                'choices' => [
+                    // 'Affiche' => 'Value'  Attention, inverse du formulaire en HTML
+                    'Studio' => 1,
+                    'T2' => 2,
+                    'T3' => 3,
+                    'T4' => 4,
+                    'T5' => 5,
+                ],
+            ])
+            ->add('type', ChoiceType::class, [
+                'choices' => [
+                    'Maison' => 'maison',
+                    'Appartement' => 'appartement',
+                ],
+                //Pour avoir des radios au lieu du select
+                'expanded' => true,
+            ])
             ->add('sold')
         ;
     }
