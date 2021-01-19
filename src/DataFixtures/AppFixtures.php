@@ -22,7 +22,7 @@ class AppFixtures extends Fixture
             $title .= RealEstate::SIZES[$rooms]; //Création de la constante SIZES, on obtient les valeurs Studio, T2...
             // Maison T4 (en centre-ville, en campagne)
             $realEstate->setTitle($title);
-            $realEstate->setDescription($faker->text);
+            $realEstate->setDescription($faker->text(2000));
             $realEstate->setSurface($faker->numberBetween(10, 400));
             $realEstate->setPrice($faker->numberBetween(34875, 584725));
             $realEstate->setRooms($faker->numberBetween(1, 5));
