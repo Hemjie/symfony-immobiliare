@@ -23,7 +23,9 @@ class RealEstateType extends AbstractType
                     'class' => 'p-0',
                 ],
             ])
-            ->add('price')
+            ->add('price', null, [
+                'label' => 'Prix',
+            ])
             ->add('rooms', ChoiceType::class, [
                 'choices' => [
                     // 'Affiche' => 'Value'  Attention, inverse du formulaire en HTML
@@ -33,6 +35,7 @@ class RealEstateType extends AbstractType
                     'T4' => 4,
                     'T5' => 5,
                 ],
+                'label' => 'Nombre de pièces'
             ])
             ->add('type', ChoiceType::class, [
                 'choices' => [
@@ -42,7 +45,13 @@ class RealEstateType extends AbstractType
                 //Pour avoir des radios au lieu du select
                 'expanded' => true,
             ])
-            ->add('sold')
+            ->add('sold', ChoiceType::class, [
+                'label' => 'Vendu?',
+                'choices' => [
+                    'Oui' => true,
+                    'Non' => false,
+                ]
+            ])
         ;
     }
 

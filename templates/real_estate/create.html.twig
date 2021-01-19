@@ -1,14 +1,41 @@
 {% extends 'base.html.twig'%}
 
 {%  block body %}
-    <h1>Ajouter une annonce</h1>
+    <h1 class="text-center my-4">Ajouter une annonce</h1>
 
-    {# J'affiche mon formulaire #}
-    {{ form_start(realEstateForm) }} <!-- <form> -->
-        {{ form_widget(realEstateForm) }} <!-- <input> -->
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            {# J'affiche mon formulaire #}
+            {{ form_start(realEstateForm) }} <!-- <form> -->
+            <div class="row">
+                <div class="col-lg-6">
+                    {{ form_label(realEstateForm.title, 'Titre') }} <!-- <label> -->
+                    {{ form_widget(realEstateForm.title) }} <!-- <input> -->
+                </div>
+                <div class="col-lg-6">
+                    {{ form_row(realEstateForm.description) }} <!-- label + input -->
+                </div>
+                <div class="col-lg-6">
+                    {{ form_row(realEstateForm.surface) }}
+                </div>
+                <div class="col-lg-6">
+                    {{ form_row(realEstateForm.price) }}
+                </div>
+                <div class="col-lg-6">
+                    {{ form_row(realEstateForm.rooms) }}
+                </div>
+                <div class="col-lg-3">
+                    {{ form_row(realEstateForm.type) }}
+                </div>
+                <div class="col-lg-3 py-1">
+                    {{ form_row(realEstateForm.sold) }}
+                </div>
+            </div>
 
-        <!-- formnovalidate désactive la validation HTML5 -->
-        <button class="btn btn-primary" formnovalidate>Ajouter</button>
-    {{ form_end(realEstateForm) }}
-    <!-- Les formulaires de Symfony sont protégés des failles CSRF -->
+            <!-- formnovalidate désactive la validation HTML5 -->
+            <button class="btn btn-primary" formnovalidate>Ajouter</button>
+            {{ form_end(realEstateForm) }}
+            <!-- Les formulaires de Symfony sont protégés des failles CSRF -->
+        </div>
+    </div>
 {% endblock %}
