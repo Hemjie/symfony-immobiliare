@@ -2,8 +2,23 @@
 
 
 {% block body %}
+    {# renvoie un seul type de message, n'est pas dynamique au niveau de la classe => voir base.html.twig
+    { % for message in app.flashes('success') %}
+        <div class="flash-notice alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    #}
 
-    <h1 class="text-center my-4">Toutes les annonces</h1>
+
+    <div class="row my-4">
+        <div class="col-lg-10">
+            <h1 class="text-center">Toutes les annonces</h1>
+        </div>
+        <div class="col-lg-2">
+            <a href="{{ path('real_estate_create') }}" class="btn btn-primary">Créer une annonce</a>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-lg-3">
@@ -26,9 +41,22 @@
                 {% for property in properties %}
                     <div class="col-lg-4">
                         <div class="card">
-                            <a href="{{ path('property_show', {slug: property.title }) }}">
-                                {{ property.title }}
-                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="{{ path('real_estate_show', { id: property.id }) }}">
+                                        {{ property.title }}
+                                    </a>
+                                </h5>
+                                <p class="card-text">
+                                    {{ property.description }}
+                                </p>
+                                <p class="card-text">
+                                    {{ property.surface }}m² - {{ property.rooms }} pièce(s)
+                                </p>
+                                <p class="property-price">
+                                    {{ property.price }} €
+                                </p>
+                            </div>
                         </div>
                     </div>
                 {% endfor %}

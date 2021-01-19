@@ -141,6 +141,19 @@ class RealEstate
         return $this->rooms;
     }
 
+    public function getDisplayableRooms(): string
+    {
+        $sizes = [
+            1 => 'Studio',
+            2 => 'T2',
+            3 => 'T3',
+            4 => 'T4',
+            5 => 'T5',
+        ];
+
+        return $sizes[$this->rooms];
+    }
+
     public function setRooms(int $rooms): self
     {
         $this->rooms = $rooms;

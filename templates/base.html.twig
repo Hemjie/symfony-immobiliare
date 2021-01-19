@@ -33,7 +33,16 @@
             </div>
         </nav>
         <div class="container">
-            {% block body %}{% endblock %}
+            {# recupère tous les types des messages flash avec classe dynam #}
+            {% block body %}
+                {% for label, message in app.flashes('success') %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ label }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            {% endblock %}
         </div>
 
         <!-- ton footer -->
