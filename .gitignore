@@ -14,3 +14,8 @@
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
+
+#On ignore le .idea de phpsotrm pour éviter les conflits en équipe
+.idea
+public/img/Uploads/*
+!public/img/Uploads/default.png

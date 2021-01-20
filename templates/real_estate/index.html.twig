@@ -41,7 +41,7 @@
                 {% for property in properties %}
                     <div class="col-lg-4">
                         <div class="card mb-4">
-                            <img class="card-img" src="{{ asset('img/house.jpg') }}" alt="{{ property.title }}">
+                            <img class="card-img" src="{{ asset('img/Uploads/' ~ property.image) }}" alt="{{ property.title }}">
                             <div class="card-body">
                                 <h5 class="card-title">
                                     <a href="{{ path('real_estate_show', { slug:property.slug, id: property.id }) }}">

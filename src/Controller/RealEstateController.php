@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\RealEstate;
 use App\Form\RealEstateType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -87,6 +88,23 @@ class RealEstateController extends AbstractController
             //On génère le slug et on fait l'upload avant l'ajout en base
             $slug = $slugger->slug($realEstate->getTitle())->lower(); //Le nom de l'annonce devient le-nom-de-l-annonce
             $realEstate->setSlug($slug);
+
+            //On fait l'upload. Comment récupérer l'image?
+            // Equivalent du $_FILES
+
+            /** @var UploadedFile $image */ // info à PHPStorm
+            $image =$form->get('image')->getData(); //on récupère le nom du champ du formulaire + sa valeur
+            if ($image) {
+                $fileName = uniqid().'.'.$image->guessExtension(); //guessExtension devine le nom de l'extension
+                $image->move($this->getParameter('upload_directory'), $fileName); //le chemin est dans le paramètre upload_directory
+                $realEstate->setImage($fileName);
+            } else {
+                // On met une image par défaut si on n'uploade pas
+                $realEstate->setImage('default.png');
+            }
+
+            //dd($image); //dump and die , donne la valeur et arrête le code
+
 
             //Je dois ajouter l'objet dans la BDD
             $entityManager = $this->getDoctrine()->getManager();
