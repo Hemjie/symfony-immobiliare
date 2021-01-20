@@ -53,7 +53,10 @@ class RealEstateType extends AbstractType
                     'Non' => false,
                 ]
             ])
-            ->add('image', FileType::class)
+            ->add('image', FileType::class, [
+                //On désactive le lien avec la BDD pour l'image car Symfony ne sait pas l'afficher
+                'mapped' => false,
+            ])
         ;
     }
 

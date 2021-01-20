@@ -128,4 +128,34 @@ class RealEstateController extends AbstractController
         ]);
 
     }
+
+    /**
+     * @Route("/nos-biens/modifier/{id}", name="real_estate_edit")
+     */
+    public function edit(RealEstate $realEstate)
+    {
+        $form = $this->createForm(RealEstateType::class, $realEstate);
+
+        // Faire le traitement du formulaire...
+
+        return $this->render('real_estate/edit.html.twig', [
+           'realEstateForm' => $form->createView(),
+            'realEstate' => $realEstate,
+        ]);
+    }
+
+    /**
+     * @Route("/nos-biens/supprimer/{id}", name="real_estate_delete")
+     */
+    public function delete(RealEstate $realEstate)
+    {
+        //Pour supprimer en base avec Doctrine
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($realEstate); //DELETE FROM
+        $entityManager->flush();
+
+        $this->addFlash('danger', 'L\'annonce a bien été supprimée');
+
+        return $this->redirectToRoute('real_estate_list');
+    }
 }

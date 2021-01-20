@@ -17,5 +17,7 @@
 
 #On ignore le .idea de phpsotrm pour éviter les conflits en équipe
 .idea
+#On ignore tout le dossier upload sauf le fichier default.png et le dossier fixtures
 public/img/Uploads/*
 !public/img/Uploads/default.png
+!public/img/Uploads/fixtures/

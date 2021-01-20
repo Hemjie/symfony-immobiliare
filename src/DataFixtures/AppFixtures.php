@@ -39,6 +39,7 @@ class AppFixtures extends Fixture
             $realEstate->setRooms($faker->numberBetween(1, 5));
             $realEstate->setType($type);
             $realEstate->setSold($faker->boolean(10)); //10 % de chances d'avoir true
+            $realEstate->setImage($faker->randomElement(['default.png', 'fixtures/1.jpg', 'fixtures/2.jpg', 'fixtures/3.jpg', 'fixtures/4.jpg']));
 
             $manager->persist($realEstate); // On a crée une annonce
         }
