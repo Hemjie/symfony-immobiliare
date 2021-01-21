@@ -20,3 +20,10 @@ $('#real_estate_surface').on('input', function() { //id, on le voit dans la cons
     $('#result').remove();
     $(this).after('<div id="result">'+$(this).val()+' m²</div>');
 });
+
+// On va corriger l'affichage du label pour l'upload des images
+$('[type="file"]').on('change', function () {
+   var label = $(this).val().split('\\').pop(); // C:\\fakepath\5.png devient 5.png
+   // On ajoute le label dans l'élément suivant le input
+   $(this).next().text(label);
+});
