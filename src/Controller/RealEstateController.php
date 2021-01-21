@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\RealEstate;
 use App\Form\RealEstateType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -140,8 +141,33 @@ class RealEstateController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //ATTENTION si on change le slug aux histoires de redirections...
+
+            //Upload
+            $image = $form->get('image')->getData(); //on récupère la valeur du champ
+            if ($image) { //si on upload img dans l'annonce
+                //on doit vérifier si une ancienne img est présente pour la supprimer
+                //on fera attention de ne pas supprimer default.png et les fixtures
+
+                //on est sûr de supprimer uniquement les images des users
+                $defaultImages = ['default.png', 'fixtures/1.jpg', 'fixtures/2.jpg', 'fixtures/3.jpg', 'fixtures/4.jpg'];
+
+                if ($realEstate->getImage() && !in_array($realEstate->getImage(), $defaultImages)) {
+                    $fs = new Filesystem(); //permet de manipuler les fichiers
+                    // On supprime l'ancienne image
+                    $fs->remove($this->getParameter('upload_directory').'/'.$realEstate->getImage());
+                }
+
+                $fileName = uniqid().'.'.$image->guessExtension();
+                $image->move($this->getParameter('upload_directory'), $fileName);
+                $realEstate->setImage($fileName);
+            }
+
             // Pas besoin de faire un persist... Doctrine va détecter automatiquement qu'il doit faire un UPDATE
             $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', 'L\'annonce a bien été modifiée');
+
+            return $this->redirectToRoute('real_estate_list');
         }
 
         return $this->render('real_estate/edit.html.twig', [
