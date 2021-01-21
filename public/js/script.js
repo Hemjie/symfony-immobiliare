@@ -26,4 +26,20 @@ $('[type="file"]').on('change', function () {
    var label = $(this).val().split('\\').pop(); // C:\\fakepath\5.png devient 5.png
    // On ajoute le label dans l'élément suivant le input
    $(this).next().text(label);
+
+   // On va afficher un aperçu de l'image avant l'upload
+    let reader = new FileReader();
+    // On doit écouter un événement pour faire qqch avec cette image
+    reader.addEventListener('load', function (file) {
+        // Cleaner les anciennes images
+        $('.custom-file img').remove();
+        let base64 = file.target.result; //image en base 64
+        //Je crée une balise img en JS
+        let img = $('<img class="img-fluid mt-5" width="250" />');
+        // Je mets le base 64 dans le src de l'image
+        img.attr('src', base64);
+        // Afficher l'image dans la div .custom-file
+        $('.custom-file').prepend(img);
+    })
+    reader.readAsDataURL(this.files[0]);
 });
