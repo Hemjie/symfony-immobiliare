@@ -49,6 +49,17 @@ class RealEstateRepository extends ServiceEntityRepository
 
     }
 
+    /**
+     * Permet de faire la recherche des biens en BDD
+     */
+    public function search($query)
+    {
+        $qb = $this->createQueryBuilder('r')
+                    ->where('r.title LIKE :query')
+                    ->setParameter('query', '%'.$query.'%');
+
+        return $qb->getQuery()->getResult();
+    }
     // /**
     //  * @return RealEstate[] Returns an array of RealEstate objects
     //  */

@@ -43,3 +43,6 @@ $('[type="file"]').on('change', function () {
     })
     reader.readAsDataURL(this.files[0]);
 });
+
+
+
