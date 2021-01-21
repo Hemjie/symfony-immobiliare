@@ -17,6 +17,36 @@ class RealEstateRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, RealEstate::class);
+
+    }
+
+    public function findAllWithFilters($surface, $price, $rooms)
+    {
+        // 'SELECT * FROM real_estate r WHERE r.surface > 50 AND r.budget < 100000 AND r.rooms = 3'; requête en SQL
+        $qb = $this->createQueryBuilder('r') //SELECT * FROM real_estate r, car c'est le repo de RealEstate
+                   // ->where('r.surface > :surface') // WHERE r.surface > 50
+                   // ->andWhere('r.price < :price')
+                   // ->setParameter('surface', $surface)  // Remplace le BindValue, obligatoire pour éviter les injections SQL
+                    ->setParameters([
+                   //    'surface' => empty($surface) ? 0 : $surface,
+                   //     'price' => empty($price) ? 99999999999 : $price,
+                   ]);
+                   // ->getQuery(); // récupère la requête construite
+
+        if (!empty($surface)) { //On conditionne la requête SQL
+            $qb->andWhere('r.surface > :surface')->setParameter('surface', $surface);
+        }
+
+        if (!empty($price)) { //On conditionne la requête SQL
+            $qb->andWhere('r.price < :price')->setParameter('price', $price);
+        }
+
+        if (!empty($rooms)) { //On conditionne la requête SQL
+            $qb->andWhere('r.rooms = :rooms')->setParameter('rooms', $rooms);
+        }
+
+        return $qb->getQuery()->getResult(); // Renvoie un tableau de RealEstate, équivalent du execute
+
     }
 
     // /**
