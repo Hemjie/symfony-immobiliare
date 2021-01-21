@@ -132,11 +132,17 @@ class RealEstateController extends AbstractController
     /**
      * @Route("/nos-biens/modifier/{id}", name="real_estate_edit")
      */
-    public function edit(RealEstate $realEstate)
+    public function edit(Request $request, RealEstate $realEstate)
     {
         $form = $this->createForm(RealEstateType::class, $realEstate);
 
         // Faire le traitement du formulaire...
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Pas besoin de faire un persist... Doctrine va détecter automatiquement qu'il doit faire un UPDATE
+            $this->getDoctrine()->getManager()->flush();
+        }
 
         return $this->render('real_estate/edit.html.twig', [
            'realEstateForm' => $form->createView(),

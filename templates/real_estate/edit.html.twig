@@ -1,7 +1,7 @@
 {% extends 'base.html.twig'%}
 
 {%  block body %}
-    <h1 class="text-center my-4">Modifier une annonce</h1>
+    <h1 class="text-center my-4">Modifier l'annonce {{ realEstate.title }}</h1>
 
     <div class="row">
         <div class="col-lg-8 offset-lg-2">
@@ -30,12 +30,22 @@
                 <div class="col-lg-3 py-1">
                     {{ form_row(realEstateForm.sold) }}
                 </div>
+
+                <div class="col-lg-8">
+                {{ form_row(realEstateForm.image) }}
+                </div>
+
+                <div class="col-lg-4">
+                    <img class="img-fluid" src="{{ asset('img/Uploads/' ~ realEstate.image) }}" alt="{{ realEstate.title }}"/>
+                </div>
             </div>
 
             {{ form_widget(realEstateForm) }}
 
             <!-- formnovalidate désactive la validation HTML5 -->
-            <button class="btn btn-primary" formnovalidate>Modifier</button>
+            <div class="text-center">
+                <button class="btn btn-primary my-3" formnovalidate>Modifier</button>
+            </div>
             {{ form_end(realEstateForm) }}
             <!-- Les formulaires de Symfony sont protégés des failles CSRF -->
         </div>
