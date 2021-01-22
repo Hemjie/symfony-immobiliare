@@ -26,7 +26,7 @@ class AppFixtures extends Fixture
         $faker = Factory::create('fr_FR');
 
         // On crée des catégories avant de créer des annonces
-        $typeNames = ['Maison', 'Appartement', 'Villa', 'Garage'];
+        $typeNames = ['Maison', 'Appartement', 'Villa', 'Garage', 'Studio'];
         foreach($typeNames as $key => $typeName) {
             $type = new Type();
             $type->setName($typeName);
