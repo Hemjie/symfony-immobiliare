@@ -88,7 +88,7 @@ class RealEstate
 
     /**
      * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="realEstates")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false) //La colonne ne peut pas être nulle
      */
     private $type;
 
