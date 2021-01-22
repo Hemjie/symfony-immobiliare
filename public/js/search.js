@@ -23,7 +23,11 @@ $('#search').keyup(function() {
       for (let property of response.results) {
          let li = $('<li>'+property.title+'</li>');
          ul.append(li);
-      } */
+      }
+      $('#real-estate-list').html(ul); */
+
+      //2eme méthode, le faire dans le search controller grâce à l'API
+      //L'API nous renvoie le code HTML tout fait pour la liste des annonces
       $('#real-estate-list').html(response.html);
    }) ;
 });
