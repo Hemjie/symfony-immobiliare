@@ -17,6 +17,11 @@ class SearchController extends AbstractController
         //On va chercher les annonces grâce aux Repository
         $realEstates = $repository->search($query);
         // On renvoie du JSON car c'est une API
-        return $this->json(['results' => $realEstates]);
+        return $this->json([
+            'results' => $realEstates,
+            'html' => $this->renderView('real_estate/_real_estate.html.twig', //1er underscore = morceau de html
+                ['properties' => $realEstates]
+            ),
+            ]);
     }
 }

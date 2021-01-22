@@ -1,0 +1,23 @@
+{% for property in properties %}
+    <div class="col-lg-4">
+        <div class="card mb-4">
+            <img class="AllCardImage" src="{{ asset('img/Uploads/' ~ property.image) }}" alt="{{ property.title }}">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <a href="{{ path('real_estate_show', { slug:property.slug, id: property.id }) }}">
+                        {{ property.title }}
+                    </a>
+                </h5>
+                <p class="card-text">
+                    {{ property.surface }}m² - {{ property.rooms }} pièce(s)
+                </p>
+                <p class="property-price">
+                    {{ property.price }} €
+                </p>
+
+                <a href="{{ path('real_estate_edit', { id: property.id }) }}" class="btn btn-primary ml-1 mr-2">Modifier</a>
+                <a href="{{ path('real_estate_delete', { id: property.id }) }}" class="btn btn-danger ml-2">Supprimer</a>
+            </div>
+        </div>
+    </div>
+{% endfor %}

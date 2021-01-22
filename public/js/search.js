@@ -17,5 +17,13 @@ $('#search').keyup(function() {
    // On va récupérer un résultat en JSON de Symfony
    $.ajax('/api/search/'+value, {type: 'GET' }).then(function (response) { // ajax(url, {options})
       console.log(response);
+
+      //1ere version de l'affichage des résultats
+      /* let ul = $('<ul></ul>');
+      for (let property of response.results) {
+         let li = $('<li>'+property.title+'</li>');
+         ul.append(li);
+      } */
+      $('#real-estate-list').html(response.html);
    }) ;
 });
