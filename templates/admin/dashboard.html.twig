@@ -1,0 +1,18 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+{# ici on va chercher le fichier dans vendor/easycorp/easyadmin-bundle/src/resources/views/page/content.html.twig #}
+
+{# Grâce au fichier précédent, on trouve le bon block à surcharger (à remplir) #}
+{% block page_content %}
+    <h1 class="mb-4">Hello {{ app.user.username}}</h1>
+
+    <div class="row">
+        <div class="col-lg-4 text-center">
+            <h3>Nombre d'utilisateurs</h3>
+            <h2>{{ userCount }}</h2>
+        </div>
+        <div class="col-lg-4 text-center">
+            <h3>Nombre d'annonces</h3>
+            <h2>{{ realEstateCount }}</h2>
+        </div>
+    </div>
+{% endblock %}
