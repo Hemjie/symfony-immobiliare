@@ -80,4 +80,11 @@ class Type
 
         return $this;
     }
+
+    /**
+     * Cette méthode permet d'utiliser l'objet comme une chaîne
+     */
+    public function __toString() {
+        return $this->name;
+    }
 }
