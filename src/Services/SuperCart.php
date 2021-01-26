@@ -32,6 +32,16 @@ class SuperCart
     }
 
     /**
+     * Permet de vérifier qu'un produit est déjà dans le panier
+     */
+    public function hasItem($id) {
+        $products = $this->session->get('products', []);
+
+        //Renvoie true si le produit est déjà dans le tableau
+        return array_key_exists($id, $products);
+    }
+
+    /**
      * Permet de récupérer les items du panier
      */
     public function getItems() {
@@ -44,5 +54,34 @@ class SuperCart
     public function count(): int
     {
         return count($this->session->get('products', []));
+    }
+
+    /**
+     * Permet de calculer le total du panier
+     */
+    public function total()
+    {
+        $products = $this->session->get('products', []);
+        $total = 0;
+
+        foreach ($products as $product) {
+            $total += $product->getPrice();
+        }
+
+        return $total;
+    }
+
+    /**
+     * Permet de retirer un produit du panier
+     */
+    public function removeItem($id) {
+        $products = $this->session->get('products', []);
+
+        if ($this->hasItem($id)) {
+            unset($products[$id]); // On supprime le produit du panier
+        }
+
+        //On met à jour la session avec le tableau sans le produit supprimé
+        $this->session->set('products', $products);
     }
 }
