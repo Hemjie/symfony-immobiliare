@@ -60,6 +60,11 @@
                                 <a href="{{ path('app_login') }}" class="nav-link">Connexion</a>
                             </li>
                         {% endif %}
+
+                        <!-- Ici le panier -->
+                        <li class="nav-item active">
+                            <a class="btn btn-light" href=" {{ path('cart_index') }}">Panier ( {{ cart.count }} )</a>
+                        </li>
                     </ul>
                 </div>
             </div>

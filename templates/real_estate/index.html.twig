@@ -47,6 +47,9 @@
                 {% for property in properties %}
                     <div class="col-lg-4">
                         <div class="card mb-4">
+                            {% if property.sold %}
+                                <img class="sold" src="{{ asset('img/sold.png') }}" alt="Sold">
+                            {% endif %}
                             <img class="AllCardImage" src="{{ asset('img/Uploads/' ~ property.image) }}" alt="{{ property.title }}">
                             <div class="card-body">
                                 <h5 class="card-title">
