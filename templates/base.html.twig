@@ -43,7 +43,7 @@
                                     {{ app.user.username }}
                                 </a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Mes annonces</a>
+                                    <a class="dropdown-item" href="{{ path('my_real_estate') }}">Mes annonces</a>
                                     {% if is_granted('ROLE_ADMIN') %}
                                         <a class="dropdown-item" href="{{ path('admin') }}">Administration</a>
                                         <!-- id_granted permet de vérifier si l'user a bien le rôle ROLE_ADMIN -->
