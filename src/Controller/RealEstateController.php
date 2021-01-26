@@ -144,6 +144,11 @@ class RealEstateController extends AbstractController
      */
     public function edit(Request $request, RealEstate $realEstate)
     {
+        //On doit vérifier que l'user connecté a bien le droit de modifier l'annonce
+        if ($this->getUser() !== $realEstate->getOwner()) {
+            throw $this->createAccessDeniedException(); //Renvoie une 403
+        }
+
         $form = $this->createForm(RealEstateType::class, $realEstate);
 
         // Faire le traitement du formulaire...
@@ -190,6 +195,11 @@ class RealEstateController extends AbstractController
      */
     public function delete(RealEstate $realEstate)
     {
+        //On doit vérifier que l'user connecté a bien le droit de supprimer son annonce
+        if ($this->getUser() !== $realEstate->getOwner()) {
+            throw $this->createAccessDeniedException(); //Renvoie une 403
+        }
+
         //Pour supprimer en base avec Doctrine
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($realEstate); //DELETE FROM

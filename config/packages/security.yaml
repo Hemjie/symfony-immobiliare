@@ -38,4 +38,5 @@ security:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
         - {path: ^/creer_un_bien, roles: ROLE_USER }
+        - {path: ^/nos-annonces, roles: ROLE_USER }
         - {path: ^/easyadmin, roles: ROLE_ADMIN }
