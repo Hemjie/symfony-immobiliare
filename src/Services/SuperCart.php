@@ -85,4 +85,12 @@ class SuperCart
         $this->session->set('products', $products);
 
     }
+
+    /**
+     * Permet de vider le panier
+     */
+    public function clear()
+    {
+        $this->session->set('products', []);
+    }
 }
