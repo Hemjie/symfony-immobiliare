@@ -8,6 +8,8 @@ use Stripe\PaymentIntent;
 use Stripe\Stripe;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CartController extends AbstractController
@@ -79,13 +81,24 @@ class CartController extends AbstractController
     /**
      * @Route("/cart/success/{id}", name="cart_success")
      */
-    public function success($id, $stripeKey, SuperCart $superCart)
+    public function success($id, $stripeKey, SuperCart $superCart, MailerInterface $mailer)
     {
         Stripe::setApiKey($stripeKey);
         //On peut retrouver les infos du paiement dans Stripe
         $paymentIntent = PaymentIntent::retrieve($id);
 
         //Envoyer le mail...
+        $email = (new Email())
+            ->from('commande@immobiliare.com')
+            ->to($this->getUser()->getEmail())
+            ->subject('Votre commande')
+            ->html('<h1>Hello</h1>');
+        $mailer->send($email);
+
+        //Vider le panier
+
+
+        //Idéalement, on pourrait créer une entité Order qui contient le clt, le montant, la liste des pdts, l'id Stripe
 
 
         return $this->render('cart/success.html.twig');
