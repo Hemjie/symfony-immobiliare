@@ -83,5 +83,6 @@ class SuperCart
 
         //On met à jour la session avec le tableau sans le produit supprimé
         $this->session->set('products', $products);
+
     }
 }
